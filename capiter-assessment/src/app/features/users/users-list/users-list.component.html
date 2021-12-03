@@ -1,3 +1,65 @@
 <div class="w-100-p">
-    
+    <div class="container">
+        <div class="w-100-p d-flex align-items-center
+        justify-content-between mt-4 px-lg-3">
+            <div class="fs-4">
+                Users List
+            </div>
+            <div>
+                <button mat-raised-button color="primary"
+                class="ps-2" (click)="openDialog('manage')">
+                    <mat-icon>add</mat-icon>
+                    Add user
+                </button>
+            </div>
+        </div>
+        <div class="w-100-p content d-flex flex-wrap pt-5">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4 px-lg-3 px-md-2"
+            *ngFor="let user of usersList;let idx = index;">
+                <div class="w-100-p mat-elevation-z1 rounded-3 border-top">
+                    <div class="w-100-p d-flex justify-content-center pt-4">
+                        <div class="align-middle">
+                            <img [src]="user?.avatar" alt="avatar"
+                            class="rounded-circle h-80 w-80">
+                        </div>
+                    </div>
+                    <div class="w-100-p justify-content-center d-flex pt-4">
+                        {{ user?.first_name }} {{ user?.last_name }}
+                    </div>
+                    <div class="w-100-p justify-content-center 
+                    text-muted pt-1 d-flex pb-4">
+                        {{ user?.email }}
+                    </div>
+                    <div fxLayout="row">
+                        <div fxFlex="49%"
+                        class="border-top">
+                            <button mat-button 
+                            class="w-100-p py-2 text-primary"
+                            (click)="openDialog('manage', user)">
+                                <mat-icon>edit</mat-icon>
+                                Edit
+                            </button>
+                        </div>
+                        <div fxFlex="0.5%" class="border"></div>
+                        <div fxFlex="49%" class="border-top">
+                            <button mat-button 
+                            class="text-danger w-100-p py-2"
+                            (click)="openDialog('delete', user)">
+                                <mat-icon class="">delete</mat-icon>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w-100-p content d-flex flex-wrap pt-3
+        justify-content-center align-items-center pb-5">
+            <button mat-stroked-button
+            class="w-25 rounded-pill bordered border-primary"
+            [disabled]="isLastPage" (click)="loadMore()">
+                {{ usersList?.length }} of {{ usersListResponse?.total }}
+            </button>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,11 @@
+:host ::ng-deep {
+    img{
+        object-fit: cover;
+    }
+    .w-80{
+        width: 8rem;
+    }
+    .h-80{
+        height: 8rem;
+    }
+}

@@ -11,17 +11,21 @@ import { AuthenticationRoutingModule } from "./authentication-routing.module";
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { SignUpComponent } from "./sign-up/sign-up.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
+        HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
         FlexLayoutModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
+        MatSnackBarModule,
 
         AuthenticationRoutingModule,
         PageContainerModule,

@@ -1,0 +1,118 @@
+<div class="w-100-p">
+    <div *ngIf="data?.context === 'manage'">
+        <div *ngTemplateOutlet="manageTpl"></div>
+    </div>
+    <div *ngIf="data?.context === 'delete'">
+        <div *ngTemplateOutlet="deleteTpl"></div>
+    </div>
+</div>
+
+<ng-template #manageTpl>
+    <div class="w-100-p">
+        <div mat-dialog-title class="pb-3 d-flex">
+            <div class="title-text flex-fill">
+                <div class="d-flex align-items-center">
+                    <mat-icon class="text-primary">info</mat-icon>
+                    &nbsp;{{ data?.user ? 'Edit' : 'Add' }} user
+                </div>
+                <div
+                class="font-size-13 text-muted pt-2">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="bg-white">
+            <form [formGroup]="userForm" novalidate
+            class="w-100 mt-2" (ngSubmit)="onSubmit()">
+                <div class="w-100">
+                    <mat-form-field appearance="fill"
+                    color="primary" class="w-100">
+                        <mat-label>First name</mat-label>
+                        <input type="text" name="firstName"
+                        placeholder="Enter first name..."
+                        matInput formControlName="firstName"
+                        autocomplete="new-password">
+                    </mat-form-field>
+                    <div [ngTemplateOutlet]="validationTpl"
+                    [ngTemplateOutletContext]="{
+                        key: 'firstName', msg: 'First name required'}"></div>
+                </div>
+                <div class="w-100">
+                    <mat-form-field appearance="fill"
+                    color="primary" class="w-100">
+                        <mat-label>Last name</mat-label>
+                        <input type="text" name="lastName"
+                        placeholder="Enter last name..."
+                        matInput formControlName="lastName"
+                        autocomplete="new-password">
+                    </mat-form-field>
+                    <div [ngTemplateOutlet]="validationTpl"
+                    [ngTemplateOutletContext]="{
+                        key: 'lastName', msg: 'Last name required'}"></div>
+                </div>
+                <div class="w-100">
+                    <mat-form-field appearance="fill"
+                    color="primary" class="w-100">
+                        <mat-label>Job</mat-label>
+                        <input type="text" name="job"
+                        placeholder="Enter user's job..."
+                        matInput formControlName="job"
+                        autocomplete="new-password">
+                    </mat-form-field>
+                    <div [ngTemplateOutlet]="validationTpl"
+                    [ngTemplateOutletContext]="{
+                        key: 'job', msg: 'Job required'}"></div>
+                </div>
+                <div mat-dialog-actions 
+                class="pt-3 pb-12 d-flex justify-content-end">
+                    <div class="btn-container justify-content-end d-flex">
+                        <button mat-stroked-button mat-dialog-close 
+                        type="button" (close)="closeDialog()">Cancel</button>
+                        <button mat-stroked-button class="text-primary"
+                        type="submit" [disabled]="loading">
+                            {{ data?.user ? 'Update' : 'Save' }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #validationTpl let-key="key" let-msg="msg">
+    <div *ngIf="(loading || frm![key].touched) && 
+    frm![key].errors" class="invalid-feedback d-flex mt-n3">
+        <div *ngIf="frm![key].errors!['required']">{{msg}}</div>
+    </div>
+</ng-template>
+
+<ng-template #deleteTpl>
+    <div class="w-100-p">
+        <div mat-dialog-title class="pb-0 d-flex">
+            <div class="title-text flex-fill">
+                <div class="d-flex align-items-center">
+                    <mat-icon class="text-danger">error_outline</mat-icon>
+                    &nbsp;Delete user
+                </div>
+                <div
+                class="font-size-13 text-muted pt-2">
+                    
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-content class="bg-white ps-5">
+            Kindly confirm that you would like to delete the 
+            selected user
+        </div>
+        <div mat-dialog-actions 
+        class="pt-5 pb-12 d-flex justify-content-end">
+            <div class="btn-container justify-content-end d-flex">
+                <button mat-stroked-button mat-dialog-close type="button"
+                (close)="closeDialog()">Close</button>
+                <button mat-stroked-button class="text-danger"
+                type="submit" [disabled]="loading"
+                (click)="deleteUser()">Delete</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

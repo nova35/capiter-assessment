@@ -1,9 +1,9 @@
-<div fxLayout="row" class="h-100">
+<div fxLayout="row" class="h-100-p">
     <div fxFlex="30%" 
-    class="login-content h-100 bg-primary p-5">
+    class="login-content h-100-p bg-primary p-5">
         <h2 class="text-white">Login</h2>
     </div>
-    <div fxFlex="70%" class="h-100 flex-column d-flex">
+    <div fxFlex="70%" class="h-100-p flex-column d-flex">
         <div class="d-flex justify-content-end p-4">
             <a mat-stroked-button color="primary"
             [routerLink]="['/authentication/signup']">
@@ -14,7 +14,7 @@
         align-items-center justify-content-center"
         fxLayout="row">
             <div fxFlex="50%" class="margin-auto mb-5 pb-5">
-                <h1 class="pb-2">Sign in</h1>
+                <h1 class="pb-2 fs-4">Sign in</h1>
                 <form [formGroup]="signInForm" novalidate
                 class="w-100 mt-4" (ngSubmit)="onSubmit()">
                     <div class="w-100">
@@ -60,8 +60,4 @@
     frm![key].errors" class="invalid-feedback d-flex mt-n3">
         <div *ngIf="frm![key].errors!['required']">{{msg}}</div>
     </div>
-    <!-- <div *ngIf="submitted && (isEmailMismatch || frm.email.errors)" class="invalid-feedback">
-        <div *ngIf="frm.confirm.errors.required">Email</div>
-        <div *ngIf="isEmailMismatch">Emails must match</div>
-    </div> -->
 </ng-template>
